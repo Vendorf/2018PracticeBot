@@ -131,14 +131,9 @@ public class GhostController {
 	private void TasksSetup1()
 	{
 		TaskSequenceChassis ChassisTaskSequence = new TaskSequenceChassis("Chassis Seq 1", _ChassisController);
-		ChassisTaskSequence.AddTaskTrackTo(0.0, 10.0);
-		ChassisTaskSequence.AddTaskRotateTo(90.0);
-		ChassisTaskSequence.AddTaskTrackTo(10.0, 10.0);
-		ChassisTaskSequence.AddTaskRotateTo(-90.0);
-		ChassisTaskSequence.AddTaskTrackTo(-10.0, 10.0);
-		ChassisTaskSequence.AddTaskRotateTo(90.0);
-		ChassisTaskSequence.AddTaskTrackTo(0.0, 10.0);
-		ChassisTaskSequence.AddTaskRotateTo(180.0);
+		ChassisTaskSequence.AddTaskTrackTo(0.0, 5.0);
+		ChassisTaskSequence.AddTaskRotateTo(160.0);
+		ChassisTaskSequence.AddTaskTrackTo(0.0, 0.0);
 		
 		_TaskSequenceGroup1.AddSequence(ChassisTaskSequence);
 	}

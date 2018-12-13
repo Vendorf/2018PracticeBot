@@ -31,9 +31,10 @@ public class Chassis extends RobotSensor implements HuskySubsystem  {
 	private static final double MAX_SPEED_CHANGE = 0.1;
 	
 	private double _PreviousUseTwist = 0.0;
-	private static final double MAX_TWIST_CHANGE = 0.025;
-	
-	
+	//private static final double MAX_TWIST_CHANGE = 0.025;
+	private static final double MAX_TWIST_CHANGE = 0.5;
+
+
 	private HuskyVector2D _CurrentLocation = new HuskyVector2D();
 	private HuskyVector2D _CurrentVelocity = new HuskyVector2D();
 	private CompassHeading _CurHeading = new CompassHeading();

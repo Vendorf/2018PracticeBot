@@ -42,9 +42,9 @@ public class HumanController {
 		SmartDashboard.putBoolean("Trigger Button", TriggerButton);
 		SmartDashboard.putNumber("Sonar Distance", SonarValue);
 
-		DoPivotArm(TriggerButton, TopButton);
+	//	DoPivotArm(TriggerButton, TopButton);
 		
-		_TheArm.SetMotorValue(_PivotArmController.GetArmMotorValue());
+	//	_TheArm.SetMotorValue(_PivotArmController.GetArmMotorValue());
 		_TheChassis.SetMoveValues(ForBack, Twist);
 	}
 	

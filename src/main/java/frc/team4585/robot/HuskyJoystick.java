@@ -65,7 +65,20 @@ public class HuskyJoystick extends RobotSensor implements HuskySubsystem  {
 	
 	private double TweakTwistValue(double RawValue)
 	{
-		return RawValue;
+		final double TWIST_MAX = 0.6;
+		double RetValue = RawValue;
+		if(Math.abs(RawValue) >= TWIST_MAX)
+		{
+			if(RawValue > 0.0)
+			{
+				RetValue = TWIST_MAX;
+			}
+			else
+			{
+				RetValue = -TWIST_MAX;
+			}
+		}
+		return RetValue;
 	}
 	
 	private double TweakThrottleValue(double RawValue)
