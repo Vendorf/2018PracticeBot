@@ -93,8 +93,10 @@ public class GhostController {
 		_ChassisController.SetCurrentLocation(0.0, 0.0);
 		SmartDashboard.putString("Chosen Sequence Group", _CurrentTaskSequenceGroup.GetGroupName());
 	}
-	
-	
+
+	/**
+	 * Called for every tick of autonomous loop from Robot
+	 */
 	public void EvaluateDecisions()
 	{
 		double CurrentHeading = _TheChassis.GetCurrentHeading();
@@ -115,7 +117,7 @@ public class GhostController {
 		SmartDashboard.putNumber("Max Speed So Far", _DebugMaxSpeed);
 
 		
-		if(_CurrentTaskSequenceGroup.DoTasks())
+		if(_CurrentTaskSequenceGroup.DoTasks()) //this will return true when all TaskSequence threads complete
 		{
 			// task list all done
 			_TheChassis.SetMoveValues(0.0, 0.0);
@@ -131,9 +133,14 @@ public class GhostController {
 	private void TasksSetup1()
 	{
 		TaskSequenceChassis ChassisTaskSequence = new TaskSequenceChassis("Chassis Seq 1", _ChassisController);
-		ChassisTaskSequence.AddTaskTrackTo(0.0, 5.0);
-		ChassisTaskSequence.AddTaskRotateTo(160.0);
-		ChassisTaskSequence.AddTaskTrackTo(0.0, 0.0);
+		ChassisTaskSequence.AddTaskTrackTo(0.0, 10.0);
+		ChassisTaskSequence.AddTaskRotateTo(90.0);
+		ChassisTaskSequence.AddTaskTrackTo(10.0, 10.0);
+		ChassisTaskSequence.AddTaskRotateTo(-90.0);
+		ChassisTaskSequence.AddTaskTrackTo(-10.0, 10.0);
+		ChassisTaskSequence.AddTaskRotateTo(90.0);
+		ChassisTaskSequence.AddTaskTrackTo(0.0, 10.0);
+		ChassisTaskSequence.AddTaskRotateTo(180.0);
 		
 		_TaskSequenceGroup1.AddSequence(ChassisTaskSequence);
 	}

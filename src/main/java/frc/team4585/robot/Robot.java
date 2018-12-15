@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 	
 	private GhostController _TheGhost = new GhostController(_MasterTimer);
 	private HumanController _TheHuman = new HumanController();
-	
+
 
 
 	/**
@@ -63,6 +63,7 @@ public class Robot extends IterativeRobot {
 
 	/**
 	 * This function is called periodically during autonomous.
+     * Called once per tick of loopFunc() in IterativeRobotBase class (main running loop)
 	 */
 	@Override
 	public void autonomousPeriodic() {

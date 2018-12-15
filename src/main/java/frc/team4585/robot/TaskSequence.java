@@ -2,10 +2,11 @@ package frc.team4585.robot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import edu.wpi.first.wpilibj.Timer;
 
-public class TaskSequence {
+public class TaskSequence implements Callable<Boolean> {
 
 	private String _SeqName = ".";
 	
@@ -29,7 +30,19 @@ public class TaskSequence {
 	{
 		_MyTaskList.add(_SequenceSize++, NewTask);
 	}
-	
+
+    /**
+     * Call function inherrited from Callable allowing it to be used with Threads and return values across threads
+     * @return the Boolean of when the task has succeeded
+     */
+	@Override
+	public Boolean call() {
+	    while(!_TasksCompleted){
+	        DoCurrentTask();
+        }
+        return _TasksCompleted;
+	}
+
 	public boolean DoCurrentTask()
 	{
 		if(!_TasksCompleted)
@@ -95,7 +108,9 @@ public class TaskSequence {
 	{
 		AddTask(new AutoTaskWaitForTime(WaitSeconds, MasterTimer));
 	}
-	
+
+
+
 	////////////////////////////////////////////////////////////////////
 	
 

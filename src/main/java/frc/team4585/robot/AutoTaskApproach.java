@@ -14,6 +14,7 @@ public class AutoTaskApproach extends AutoTask {
 		_UseSensor = UseSensor;
 		_TargetDistance = ApproachDistance;
 		_ApproachSpeed = ApproachSpeed;
+		_TheChassisControl = TheChassisControl;
 	}
 	
 	public void StartTask()

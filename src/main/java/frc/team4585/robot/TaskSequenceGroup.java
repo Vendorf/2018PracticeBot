@@ -1,6 +1,10 @@
 package frc.team4585.robot;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 public class TaskSequenceGroup {
@@ -22,17 +26,37 @@ public class TaskSequenceGroup {
 	{
 		return _GroupName;
 	}
-	
+
+    /**
+     * Performs tasks for autonomous based on submitted TaskSequences
+     * Places TaskSequences into a threadpool, allowing them to run between autonomous ticks
+     * @return true when all TaskSequence threads have terminated
+     */
 	public boolean DoTasks()
 	{
-		if(!_AllSequencesCompleted)
-		{
-			_AllSequencesCompleted = true;
-			for(TaskSequence CurSeq : _MySequenceList)
-			{
-				_AllSequencesCompleted &= CurSeq.DoCurrentTask();
-			}
-		}
+        ExecutorService es = Executors.newFixedThreadPool(10); //arbitrary maximum of sequences
+        List<Future<Boolean>> futures = null;
+        try {
+             futures = es.invokeAll(_MySequenceList);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for(Future<Boolean> future : futures){ //will only return true on DoTasks when all futures have returned
+            if(!future.isDone()){
+                _AllSequencesCompleted = false;
+                break;
+            }
+            _AllSequencesCompleted = true;
+        }
+//        if(!_AllSequencesCompleted)
+//		{
+//			_AllSequencesCompleted = true;
+//			for(TaskSequence CurSeq : _MySequenceList)
+//			{
+//				_AllSequencesCompleted &= CurSeq.DoCurrentTask();
+//			}
+//		}
 		
 		return _AllSequencesCompleted;
 	}
